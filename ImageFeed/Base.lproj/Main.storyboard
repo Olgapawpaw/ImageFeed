@@ -22,7 +22,7 @@
                                 <color key="backgroundColor" name="YP Black"/>
                                 <color key="sectionIndexBackgroundColor" name="YP Black"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationWidth="10" reuseIdentifier="ImagesListCell" rowHeight="184" id="877-fm-7QJ" customClass="ImagesListCell" customModule="ImageFeed" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationWidth="10" reuseIdentifier="ImagesListCell" rowHeight="184" id="877-fm-7QJ" customClass="ImagesListCell" customModule="ImageFeed" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="393" height="184"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="877-fm-7QJ" id="m7u-2Y-sPa">
@@ -73,9 +73,9 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
-                                            <outlet property="buttonLike" destination="uuA-AW-dWL" id="qGo-YU-KhF"/>
-                                            <outlet property="imagePhoto" destination="mNU-aa-SXA" id="DHm-1Q-InG"/>
-                                            <outlet property="labelDate" destination="wyi-1c-YRx" id="f0i-bh-yWe"/>
+                                            <outlet property="dateLabel" destination="wyi-1c-YRx" id="qT3-Mg-abn"/>
+                                            <outlet property="likeButton" destination="uuA-AW-dWL" id="5Kd-1F-xnN"/>
+                                            <outlet property="photoImage" destination="mNU-aa-SXA" id="fiX-Y1-ILA"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
