@@ -104,7 +104,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1105" y="660"/>
+            <point key="canvasLocation" x="1126" y="-74"/>
         </scene>
         <!--Profile-->
         <scene sceneID="e47-nD-9gV">
@@ -121,7 +121,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="syJ-Re-d9H" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1104.5801526717557" y="-35.211267605633807"/>
+            <point key="canvasLocation" x="1126" y="628"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="9Yv-zZ-bfM">
@@ -137,8 +137,8 @@
                         </tabBarAppearance>
                     </tabBar>
                     <connections>
-                        <segue destination="lBw-5X-uMS" kind="relationship" relationship="viewControllers" id="Ldc-5j-qRv"/>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="P02-Ls-rTM"/>
+                        <segue destination="lBw-5X-uMS" kind="relationship" relationship="viewControllers" id="xtb-8Q-q87"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ac4-Uv-uA9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -156,8 +156,8 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9An-Nt-4TG">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="414" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="2TV-J5-45L">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="852"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="414" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="2TV-J5-45L">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
                                     </imageView>
                                 </subviews>
                                 <constraints>
@@ -185,7 +185,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NjP-VJ-nWo">
-                                <rect key="frame" x="162" y="751" width="50" height="50"/>
+                                <rect key="frame" x="171.66666666666666" y="751" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="4Ng-17-ffd"/>
                                     <constraint firstAttribute="width" constant="50" id="PVX-1V-RiH"/>
@@ -200,9 +200,9 @@
                         <viewLayoutGuide key="safeArea" id="GnR-hy-u1J"/>
                         <color key="backgroundColor" name="YP Black"/>
                         <constraints>
-                            <constraint firstItem="GnR-hy-u1J" firstAttribute="bottom" secondItem="NjP-VJ-nWo" secondAttribute="bottom" constant="51" id="32d-37-pkU"/>
+                            <constraint firstAttribute="bottom" secondItem="NjP-VJ-nWo" secondAttribute="bottom" constant="51" id="32d-37-pkU"/>
                             <constraint firstItem="9An-Nt-4TG" firstAttribute="top" secondItem="XeK-bx-AD4" secondAttribute="top" id="3C1-II-8Ej"/>
-                            <constraint firstItem="NjP-VJ-nWo" firstAttribute="leading" secondItem="GnR-hy-u1J" secondAttribute="leading" constant="162" id="Dko-rs-rDx"/>
+                            <constraint firstItem="NjP-VJ-nWo" firstAttribute="centerX" secondItem="GnR-hy-u1J" secondAttribute="centerX" id="Dko-rs-rDx"/>
                             <constraint firstAttribute="bottom" secondItem="9An-Nt-4TG" secondAttribute="bottom" id="JXB-4O-VQh"/>
                             <constraint firstItem="HtP-x1-bGF" firstAttribute="leading" secondItem="GnR-hy-u1J" secondAttribute="leading" constant="8" id="LxC-7y-Lca"/>
                             <constraint firstItem="9An-Nt-4TG" firstAttribute="leading" secondItem="GnR-hy-u1J" secondAttribute="leading" id="OoR-ad-K3B"/>
@@ -218,7 +218,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CS1-9M-x0r" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2171.7557251908397" y="659.85915492957747"/>
+            <point key="canvasLocation" x="2079" y="-75"/>
         </scene>
     </scenes>
     <resources>

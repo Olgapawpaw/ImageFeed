@@ -4,13 +4,13 @@ let photosName: [String] = Array(0..<20).map{ "\($0)" }
 
 final class ImagesListViewController: UIViewController {
     
-// MARK: - IB Outlets
+    // MARK: - IB Outlets
     @IBOutlet private weak var tableView: UITableView!
-
-// MARK: - Private Properties
+    
+    // MARK: - Private Properties
     private let ShowSingleImageSegueIdentifier = "ShowSingleImage"
     
-// MARK: - Overrides Methods
+    // MARK: - Overrides Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)

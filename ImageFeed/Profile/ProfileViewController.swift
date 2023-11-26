@@ -1,6 +1,5 @@
 import Foundation
 import UIKit
-import AssetsLibrary
 
 final class ProfileViewController: UIViewController {
     
