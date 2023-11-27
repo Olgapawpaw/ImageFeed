@@ -7,7 +7,7 @@ final class ImagesListCell: UITableViewCell {
     @IBOutlet private var photoImage: UIImageView!
     @IBOutlet private var likeButton: UIButton!
     @IBOutlet private var dateLabel: UILabel!
-
+    
     // MARK: - Public Properties
     static let reuseIdentifier = "ImagesListCell"
     
