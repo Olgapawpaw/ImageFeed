@@ -17,12 +17,12 @@ final class WebViewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         webView.navigationDelegate = self
-        var urlCompsonents = URLComponents(string: UnsplashAuthorizeURLString)!
+        var urlCompsonents = URLComponents(string: "https://unsplash.com/oauth/authorize")!
         urlCompsonents.queryItems = [
-            URLQueryItem(name: "client_id", value: AccessKey),
-            URLQueryItem(name: "redirect_uri", value: RedirectURI),
+            URLQueryItem(name: "client_id", value: ApiConstants.accessKey.rawValue),
+            URLQueryItem(name: "redirect_uri", value: ApiConstants.redirectURI.rawValue),
             URLQueryItem(name: "response_type", value: "code"),
-            URLQueryItem(name: "scope", value: AccessScope)
+            URLQueryItem(name: "scope", value: ApiConstants.accessScope.rawValue)
         ]
         let url = urlCompsonents.url!
         
@@ -32,8 +32,8 @@ final class WebViewViewController: UIViewController {
         updateProgress()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         webView.addObserver(
             self,
             forKeyPath: #keyPath(WKWebView.estimatedProgress),
@@ -42,8 +42,8 @@ final class WebViewViewController: UIViewController {
         updateProgress()
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), context: nil)
     }
 

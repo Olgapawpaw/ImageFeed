@@ -259,7 +259,7 @@
                                 <rect key="frame" x="166.66666666666666" y="396" width="60" height="60"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tdr-0t-aJ8">
-                                <rect key="frame" x="52.666666666666657" y="714" width="288" height="48"/>
+                                <rect key="frame" x="16" y="680" width="361" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="288" id="erw-Qr-2jU"/>
                                     <constraint firstAttribute="height" constant="48" id="l0c-PW-y9b"/>
@@ -286,9 +286,10 @@
                         <viewLayoutGuide key="safeArea" id="84P-XK-3Bd"/>
                         <color key="backgroundColor" name="YP Black"/>
                         <constraints>
-                            <constraint firstItem="tdr-0t-aJ8" firstAttribute="centerX" secondItem="1C7-CF-Zek" secondAttribute="centerXWithinMargins" id="GbJ-xa-u7F"/>
+                            <constraint firstItem="tdr-0t-aJ8" firstAttribute="leading" secondItem="1C7-CF-Zek" secondAttribute="leading" constant="16" id="5SM-sm-c5E"/>
                             <constraint firstAttribute="centerX" secondItem="plQ-qO-RWN" secondAttribute="centerX" id="YWu-e1-w8Y"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="tdr-0t-aJ8" secondAttribute="bottom" constant="90" id="mPz-av-BK4"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="tdr-0t-aJ8" secondAttribute="bottom" constant="124" id="mPz-av-BK4"/>
+                            <constraint firstAttribute="trailing" secondItem="tdr-0t-aJ8" secondAttribute="trailing" constant="16" id="qIB-GI-nKd"/>
                             <constraint firstAttribute="centerY" secondItem="plQ-qO-RWN" secondAttribute="centerY" id="zDM-54-bQh"/>
                         </constraints>
                     </view>
@@ -296,7 +297,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XYU-yq-G6t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2007" y="-934"/>
+            <point key="canvasLocation" x="2006.8702290076335" y="-934.50704225352115"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="zqo-j8-TFS">

@@ -1,9 +1,9 @@
 import Foundation
 
-class OAuth2TokenStorage {
-    var token: String {
+final class OAuth2TokenStorage {
+    var token: String? {
         get {
-            return UserDefaults.standard.string(forKey: "token") ?? "no"
+            return UserDefaults.standard.string(forKey: "token") ?? nil
         }
         
         set(newValue) {

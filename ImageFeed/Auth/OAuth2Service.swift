@@ -33,13 +33,13 @@ final class OAuth2Service {
 extension URLRequest {
     static func makeHTTPRequest (httpMethod: String, code: String) -> URLRequest {
         var urlComponents = URLComponents()
-        urlComponents.scheme = SchemeURL
-        urlComponents.host = HostURL
-        urlComponents.path = PathURL
+        urlComponents.scheme = NetworkURL.schemeURL.rawValue
+        urlComponents.host = NetworkURL.hostURL.rawValue
+        urlComponents.path = NetworkURL.pathURL.rawValue
         urlComponents.queryItems = [
-            URLQueryItem(name: "client_id", value: AccessKey),
-            URLQueryItem(name: "client_secret", value: SecretKey),
-            URLQueryItem(name: "redirect_uri", value: RedirectURI),
+            URLQueryItem(name: "client_id", value: ApiConstants.accessKey.rawValue),
+            URLQueryItem(name: "client_secret", value: ApiConstants.secretKey.rawValue),
+            URLQueryItem(name: "redirect_uri", value: ApiConstants.redirectURI.rawValue),
             URLQueryItem(name: "code", value: code),
             URLQueryItem(name: "grant_type", value: "authorization_code")
         ]
@@ -56,5 +56,11 @@ enum NetworkError: Error {
     case urlRequestError(Error)
     case urlSessionError
     case jsonErorr(Error)
+}
+
+private enum NetworkURL: String {
+    case hostURL = "unsplash.com" 
+    case schemeURL = "https"
+    case pathURL = "/oauth/token"
 }
 
