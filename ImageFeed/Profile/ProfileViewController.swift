@@ -1,23 +1,37 @@
 import Foundation
 import UIKit
+import Kingfisher
 
 final class ProfileViewController: UIViewController {
+    private let profileService = ProfileService.shared
+    private let profileImageService = ProfileImageService.shared
+    private var profileImageServiceObserver: NSObjectProtocol?
+    private let profilePhoto = UIImageView()
+    private let nameLabel = UILabel()
+    private let loginNameLabel = UILabel()
+    private let bioLabel = UILabel()
     
     // MARK: - Overrides Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         createProfileScreen()
+        
+        profileImageServiceObserver = NotificationCenter.default
+                    .addObserver(
+                        forName: ProfileImageService.DidChangeNotification,
+                        object: nil,
+                        queue: .main
+                    ) { [weak self] _ in
+                        guard let self = self else { return }
+                        self.updateAvatar()
+                    }
+        updateAvatar()
+        updateProfileData()
     }
     
     // MARK: - Private Methods
-    func createProfileScreen(){
+    private func createProfileScreen(){
         view.backgroundColor = UIColor(named: "YP Black")
-        
-        let profilePhotoImage = UIImage(named: "photo")
-        let profilePhoto = UIImageView(image: profilePhotoImage)
-        let nameLabel = UILabel()
-        let idLabel = UILabel()
-        let descriptionLabel = UILabel()
         let exitButton = UIButton.systemButton(
             with: UIImage(named: "exit")!,
             target: self,
@@ -26,26 +40,26 @@ final class ProfileViewController: UIViewController {
         
         view.addSubview(profilePhoto)
         view.addSubview(nameLabel)
-        view.addSubview(idLabel)
-        view.addSubview(descriptionLabel)
+        view.addSubview(loginNameLabel)
+        view.addSubview(bioLabel)
         view.addSubview(exitButton)
         
         profilePhoto.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        idLabel.translatesAutoresizingMaskIntoConstraints = false
-        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        loginNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        bioLabel.translatesAutoresizingMaskIntoConstraints = false
         exitButton.translatesAutoresizingMaskIntoConstraints = false
         
         profilePhoto.backgroundColor = UIColor(named: "YP Black")
+        profilePhoto.clipsToBounds = true
+        profilePhoto.layer.masksToBounds = true
+        profilePhoto.layer.cornerRadius = 35
         nameLabel.textColor = .white
-        nameLabel.text = "Екатерина Новикова"
         nameLabel.font = UIFont.boldSystemFont(ofSize: 23)
-        idLabel.textColor = UIColor(named: "YP Grey")
-        idLabel.text = "@ekaterina_nov"
-        idLabel.font = UIFont.systemFont(ofSize: 13)
-        descriptionLabel.textColor = .white
-        descriptionLabel.text = "Hello, world!"
-        descriptionLabel.font = UIFont.systemFont(ofSize: 13)
+        loginNameLabel.textColor = UIColor(named: "YP Grey")
+        loginNameLabel.font = UIFont.systemFont(ofSize: 13)
+        bioLabel.textColor = .white
+        bioLabel.font = UIFont.systemFont(ofSize: 13)
         exitButton.backgroundColor = UIColor(named: "YP Black")
         exitButton.tintColor = UIColor(named: "YP Red")
         
@@ -56,15 +70,32 @@ final class ProfileViewController: UIViewController {
             profilePhoto.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             nameLabel.topAnchor.constraint(equalTo: profilePhoto.bottomAnchor, constant: 8),
             nameLabel.leadingAnchor.constraint(equalTo: profilePhoto.leadingAnchor),
-            idLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8),
-            idLabel.leadingAnchor.constraint(equalTo: profilePhoto.leadingAnchor),
-            descriptionLabel.topAnchor.constraint(equalTo: idLabel.bottomAnchor, constant: 8),
-            descriptionLabel.leadingAnchor.constraint(equalTo: profilePhoto.leadingAnchor),
+            loginNameLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8),
+            loginNameLabel.leadingAnchor.constraint(equalTo: profilePhoto.leadingAnchor),
+            bioLabel.topAnchor.constraint(equalTo: loginNameLabel.bottomAnchor, constant: 8),
+            bioLabel.leadingAnchor.constraint(equalTo: profilePhoto.leadingAnchor),
             exitButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             exitButton.centerYAnchor.constraint(equalTo: profilePhoto.centerYAnchor),
             exitButton.heightAnchor.constraint(equalToConstant: 44),
             exitButton.widthAnchor.constraint(equalToConstant: 44)
         ])
+    }
+    
+    private func updateAvatar() {
+        guard
+            let profileImageURL = profileImageService.avatarURL,
+            let url = URL(string: profileImageURL)
+        else { return }
+        let processor = RoundCornerImageProcessor(cornerRadius: 61)
+        profilePhoto.kf.indicatorType = .activity
+        profilePhoto.kf.setImage(with: url,
+                              options: [.processor(processor)])
+    }
+    
+    private func updateProfileData() {
+        nameLabel.text = profileService.profile?.name
+        loginNameLabel.text = profileService.profile?.loginName
+        bioLabel.text = profileService.profile?.bio
     }
     
     @objc
