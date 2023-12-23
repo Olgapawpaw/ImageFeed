@@ -16,7 +16,7 @@ final class ProfileImageService {
         task?.cancel()
         lastUsername = username
         
-        let request = URLRequest.makeHTTPRequestForProfile(httpMethod: "GET", username: username, token: token)
+        let request = URLRequest.makeHTTPRequestForProfile(httpMethod: "GET", token: token, pathURL: "/users/\(username)")
         
         let session = URLSession.shared
         let task = session.objectTask(for: request) { [weak self] (result: Result<UserResult, Error>) in
@@ -38,24 +38,5 @@ final class ProfileImageService {
         self.task = task
         task.resume()
     }
-}
-
-
-extension URLRequest {
-    static func makeHTTPRequestForProfile (httpMethod: String, username: String, token: String) -> URLRequest {
-        var urlComponents = URLComponents()
-        urlComponents.scheme = ApiConstants.schemeURL.rawValue
-        urlComponents.host = ApiConstants.baseURL.rawValue
-        urlComponents.path = "\(NetworkURL.pathURL.rawValue)/\(username)"
-        let url = urlComponents.url!
-        var request = URLRequest(url: url)
-        request.httpMethod = httpMethod
-        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        return request
-    }
-}
-
-private enum NetworkURL: String {
-    case pathURL = "/users"
 }
 

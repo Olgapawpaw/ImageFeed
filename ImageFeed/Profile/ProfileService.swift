@@ -13,14 +13,15 @@ final class ProfileService {
         task?.cancel()
         lastToken = token
         
-        let request = URLRequest.makeHTTPRequestForProfile(httpMethod: "GET", token: token)
+        let request = URLRequest.makeHTTPRequestForProfile(httpMethod: "GET", token: token, pathURL: "/me")
         
         let session = URLSession.shared
         let task = session.objectTask(for: request) { [weak self] (result: Result<ProfileResult, Error>) in
             switch result {
             case .success(let responseObject):
-                self?.profile = (Profile(username: responseObject.username, firstName: responseObject.firstName, lastName: responseObject.lastName, bio: responseObject.bio))
-                completion(.success(Profile(username: responseObject.username, firstName: responseObject.firstName, lastName: responseObject.lastName, bio: responseObject.bio)))
+                let profile = Profile(username: responseObject.username, firstName: responseObject.firstName, lastName: responseObject.lastName, bio: responseObject.bio)
+                self?.profile = profile
+                completion(.success(profile))
             case .failure(let error):
                 completion(.failure(error))
                 self?.lastToken = nil
@@ -30,24 +31,5 @@ final class ProfileService {
         self.task = task
         task.resume()
     }
-}
-
-extension URLRequest {
-    static func makeHTTPRequestForProfile (httpMethod: String, token: String) -> URLRequest {
-        var urlComponents = URLComponents()
-        urlComponents.scheme = ApiConstants.schemeURL.rawValue
-        urlComponents.host = ApiConstants.baseURL.rawValue
-        urlComponents.path = NetworkURL.pathURL.rawValue
-        
-        let url = urlComponents.url!
-        var request = URLRequest(url: url)
-        request.httpMethod = httpMethod
-        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        return request
-    }
-}
-
-private enum NetworkURL: String {
-    case pathURL = "/me"
 }
 

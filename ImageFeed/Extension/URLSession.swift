@@ -30,10 +30,3 @@ extension URLSession {
         return task
     }
 }
-
-enum NetworkError: Error {
-    case httpStatusCode(Int)
-    case urlRequestError(Error)
-    case urlSessionError
-    case jsonErorr(Error)
-}
