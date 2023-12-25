@@ -26,6 +26,25 @@ final class ImagesListViewController: UIViewController {
             super.prepare(for: segue, sender: sender)
         }
     }
+    
+    func tableView(
+      _ tableView: UITableView,
+      willDisplay cell: UITableViewCell,
+      forRowAt indexPath: IndexPath
+    ) {
+        if indexPath.row + 1 == ImagesListService().photos.count {
+            ImagesListService().fetchPhotosNextPage(){ [weak self] result in
+                guard let self = self else { return }
+                switch result {
+                case .success(let photo):
+                    print(photo)
+                case .failure(let error):
+                    print(error)
+                    break
+                }
+            }
+        }
+    }
 }
 
 // MARK: - UITableViewDataSource
