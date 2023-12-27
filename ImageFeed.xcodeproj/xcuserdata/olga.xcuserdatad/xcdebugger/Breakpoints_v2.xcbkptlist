@@ -3,4 +3,85 @@
    uuid = "399577D6-DAE5-4A4B-992B-81E05561798F"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D73B4DB2-8B13-44FA-975E-E0F70BACDBF8"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ImageFeedTests/ImagesListServiceTests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "7"
+            endingLineNumber = "7"
+            landmarkName = "testFetchPhotos()"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  uuid = "D73B4DB2-8B13-44FA-975E-E0F70BACDBF8 - 5825983077072c00"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ImageFeedTests.ImagesListServiceTests.testExample() throws -&gt; ()"
+                  moduleName = "ImageFeedTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/olga/Desktop/IOS/ImageFeed/ImageFeedTests/ImagesListServiceTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "31"
+                  endingLineNumber = "31"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  uuid = "D73B4DB2-8B13-44FA-975E-E0F70BACDBF8 - 5825983077072d6b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ImageFeedTests.ImagesListServiceTests.testExample() throws -&gt; ()"
+                  moduleName = "ImageFeedTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/olga/Desktop/IOS/ImageFeed/ImageFeedTests/ImagesListServiceTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "42"
+                  endingLineNumber = "42"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  uuid = "D73B4DB2-8B13-44FA-975E-E0F70BACDBF8 - 58259830770732ef"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ImageFeedTests.ImagesListServiceTests.testExample() throws -&gt; ()"
+                  moduleName = "ImageFeedTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/olga/Desktop/IOS/ImageFeed/ImageFeedTests/ImagesListServiceTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "46"
+                  endingLineNumber = "46"
+                  offsetFromSymbolStart = "12">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A45E18C3-2EFE-4048-91AD-419C550597A0"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ImageFeed/AppDelegate.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "11"
+            endingLineNumber = "11"
+            landmarkName = "application(_:didFinishLaunchingWithOptions:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

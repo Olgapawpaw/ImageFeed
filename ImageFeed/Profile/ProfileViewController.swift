@@ -1,6 +1,8 @@
 import Foundation
 import UIKit
 import Kingfisher
+import WebKit
+import SwiftKeychainWrapper
 
 final class ProfileViewController: UIViewController {
     private let profileService = ProfileService.shared
@@ -100,5 +102,21 @@ final class ProfileViewController: UIViewController {
     
     @objc
     private func didTapButton() {
+        let alert = UIAlertController(title: "Пока, Пока!", message: "Уверены, что хотите выйти?", preferredStyle: .alert)
+        let doingAction = UIAlertAction(title: "Да", style: .default) { [weak self] _ in
+            guard let self = self else {return}
+            HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
+            WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
+               records.forEach { record in
+                  WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record], completionHandler: {})
+               }
+            }
+            KeychainWrapper.standard.removeObject(forKey: "Auth token")
+            let window = UIApplication.shared.windows.first
+            window?.rootViewController = SplashViewController()
+        }
+        alert.addAction(UIAlertAction(title: "Нет", style: .cancel, handler: nil))
+        alert.addAction(doingAction)
+        present(alert, animated: true, completion: nil)
     }
 }

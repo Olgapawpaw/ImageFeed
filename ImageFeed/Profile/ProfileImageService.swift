@@ -16,7 +16,7 @@ final class ProfileImageService {
         task?.cancel()
         lastUsername = username
         
-        let request = URLRequest.makeHTTPRequest(httpMethod: "GET", token: token, pathURL: "/user/\(username)")
+        let request = URLRequest.makeHTTPRequest(httpMethod: "GET", token: token, pathURL: "/users/\(username)")
         
         let session = URLSession.shared
         let task = session.objectTask(for: request) { [weak self] (result: Result<UserResult, Error>) in
