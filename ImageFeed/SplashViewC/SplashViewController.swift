@@ -5,7 +5,7 @@ import ProgressHUD
 class SplashViewController: UIViewController {
     private let profileService = ProfileService.shared
     private let profileImageService = ProfileImageService.shared
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         createSplashView()
@@ -14,7 +14,7 @@ class SplashViewController: UIViewController {
             fetchProfile()
         } else {
             guard let authViewController = UIStoryboard(name: "Main", bundle: .main).instantiateViewController(withIdentifier: "AuthViewController") as? AuthViewController
-             else { fatalError("Invalid action") }
+            else { fatalError("Invalid action") }
             authViewController.delegate = self
             authViewController.modalPresentationStyle = .fullScreen
             present(authViewController, animated: true, completion: nil)
@@ -25,11 +25,11 @@ class SplashViewController: UIViewController {
         super.viewWillAppear(animated)
         setNeedsStatusBarAppearanceUpdate()
     }
-
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
     }
-
+    
     private func switchToTabBarController() {
         guard let window = UIApplication.shared.windows.first else {
             fatalError("Invalid Configuration")
@@ -51,20 +51,20 @@ extension SplashViewController: AuthViewControllerDelegate {
         fetchOAuthToken(code)
         UIBlockingProgressHUD.show()
     }
-        
-        private func fetchOAuthToken(_ code: String) {
-            OAuth2Service().fetchOAuthToken(code) { [weak self] result in
-                guard let self = self else { return }
-                switch result {
-                case .success(let bearerToken):
-                    OAuth2TokenStorage().token = bearerToken
-                    self.fetchProfile()
-                case .failure:
-                    ShowErrorAlert()
-                    break
-                }
+    
+    private func fetchOAuthToken(_ code: String) {
+        OAuth2Service().fetchOAuthToken(code) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let bearerToken):
+                OAuth2TokenStorage().token = bearerToken
+                self.fetchProfile()
+            case .failure:
+                ShowErrorAlert()
+                break
             }
         }
+    }
     
     private func fetchProfile() {
         guard let token = OAuth2TokenStorage().token else { return }

@@ -1,39 +1,34 @@
 import Foundation
 import UIKit
 
+protocol ImagesListCellDelegate: AnyObject {
+    func imageListCellDidTapLike(_ cell: ImagesListCell)
+}
+
 final class ImagesListCell: UITableViewCell {
-    
+    weak var delegate: ImagesListCellDelegate?
     // MARK: - IB Outlets
-    @IBOutlet private var photoImage: UIImageView!
-    @IBOutlet private var likeButton: UIButton!
-    @IBOutlet private var dateLabel: UILabel!
+    @IBOutlet var photoImage: UIImageView!
+    @IBOutlet var likeButton: UIButton!
+    @IBOutlet var dateLabel: UILabel!
     
+    @IBAction func like(_ sender: Any) {
+        delegate?.imageListCellDidTapLike(self)
+    }
     // MARK: - Public Properties
     static let reuseIdentifier = "ImagesListCell"
     
-    // MARK: - Private Properties
-    private lazy var dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .long
-        formatter.timeStyle = .none
-        return formatter
-    }()
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        photoImage.kf.cancelDownloadTask()
+    }
     
-    // MARK: - Public Methods
-    func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
-        let currentPhotosName = photosName[indexPath.row]
-        let likeActiveImage = UIImage(named: "LikeActive")
-        
-        guard let image = UIImage(named: currentPhotosName) else {
-            return
-        }
-        
-        cell.photoImage.image = image
-        cell.dateLabel.text = dateFormatter.string(from: NSDate() as Date)
-        
-        if indexPath.row % 2 == 0 {
-            cell.likeButton.imageView?.image = likeActiveImage
-        }
+    func setIsLiked(isLiked: Bool) {
+        if isLiked {
+             self.likeButton.imageView?.image = UIImage(named: "LikeActive")
+         } else {
+             self.likeButton.imageView?.image = UIImage(named: "LikeNoActive")
+         }
     }
 }
 
