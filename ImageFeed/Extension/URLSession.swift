@@ -2,8 +2,8 @@ import Foundation
 
 extension URLSession {
     func objectTask<T: Decodable>(
-            for request: URLRequest,
-            completion: @escaping (Result<T, Error>) -> Void
+        for request: URLRequest,
+        completion: @escaping (Result<T, Error>) -> Void
     ) -> URLSessionTask {
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             DispatchQueue.main.async {
@@ -17,14 +17,14 @@ extension URLSession {
                         } catch let jsonErorr {
                             completion(.failure(NetworkError.jsonErorr(jsonErorr)))
                         }
-                            } else {
-                                completion(.failure(NetworkError.httpStatusCode(statusCode)))
-                            }
-                        } else if let error = error {
-                            completion(.failure(NetworkError.urlRequestError(error)))
-                        } else {
-                            completion(.failure(NetworkError.urlSessionError))
-                        }
+                    } else {
+                        completion(.failure(NetworkError.httpStatusCode(statusCode)))
+                    }
+                } else if let error = error {
+                    completion(.failure(NetworkError.urlRequestError(error)))
+                } else {
+                    completion(.failure(NetworkError.urlSessionError))
+                }
             }
         }
         return task

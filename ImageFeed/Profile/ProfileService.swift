@@ -5,7 +5,7 @@ final class ProfileService {
     private(set) var profile: Profile?
     private var task: URLSessionTask?
     private var lastToken: String?
-
+    
     func fetchProfile(_ token: String, completion: @escaping (Result<Profile, Error>) -> Void) {
         assert(Thread.isMainThread)
         
@@ -27,7 +27,7 @@ final class ProfileService {
                 self?.lastToken = nil
             }
         }
-
+        
         self.task = task
         task.resume()
     }

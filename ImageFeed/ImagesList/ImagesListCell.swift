@@ -19,20 +19,16 @@ final class ImagesListCell: UITableViewCell {
     static let reuseIdentifier = "ImagesListCell"
     
     override func prepareForReuse() {
-            super.prepareForReuse()
-            photoImage.kf.cancelDownloadTask()
-        }
+        super.prepareForReuse()
+        photoImage.kf.cancelDownloadTask()
+    }
     
     func setIsLiked(isLiked: Bool) {
-        let likeActiveImage = UIImage(named: "LikeActive")
-        let likeUnActiveImage = UIImage(named: "LikeNoActive")
-
-        
-        if isLiked == true {
-            likeButton.imageView?.image = likeActiveImage
-        } else {
-            likeButton.imageView?.image = likeUnActiveImage
-        }
+        if isLiked {
+             self.likeButton.imageView?.image = UIImage(named: "LikeActive")
+         } else {
+             self.likeButton.imageView?.image = UIImage(named: "LikeNoActive")
+         }
     }
 }
 

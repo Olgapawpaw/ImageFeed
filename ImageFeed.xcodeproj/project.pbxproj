@@ -26,13 +26,13 @@
 		774023E32B39773E0078DE58 /* PhotoResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774023E22B39773E0078DE58 /* PhotoResult.swift */; };
 		774023E52B39958C0078DE58 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774023E42B39958C0078DE58 /* Photo.swift */; };
 		774023E72B39C8A60078DE58 /* URLRequestImageList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774023E62B39C8A60078DE58 /* URLRequestImageList.swift */; };
-		774023F12B3A20670078DE58 /* ImagesListServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774023F02B3A20670078DE58 /* ImagesListServiceTests.swift */; };
 		77450FAE2ADAFC6100A8C04D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77450FAD2ADAFC6100A8C04D /* AppDelegate.swift */; };
 		77450FB02ADAFC6100A8C04D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77450FAF2ADAFC6100A8C04D /* SceneDelegate.swift */; };
 		77450FB22ADAFC6100A8C04D /* ImagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77450FB12ADAFC6100A8C04D /* ImagesListViewController.swift */; };
 		77450FB52ADAFC6100A8C04D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77450FB32ADAFC6100A8C04D /* Main.storyboard */; };
 		77450FB72ADAFC6200A8C04D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77450FB62ADAFC6200A8C04D /* Assets.xcassets */; };
 		77450FBA2ADAFC6200A8C04D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77450FB82ADAFC6200A8C04D /* LaunchScreen.storyboard */; };
+		7782D7962B3EAC450002E3D8 /* isLikedResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7782D7952B3EAC450002E3D8 /* isLikedResult.swift */; };
 		77974E5D2B1364780083D88B /* ApiConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77974E5C2B1364780083D88B /* ApiConstants.swift */; };
 		77BA99042AF65BF7005F69BC /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BA99032AF65BF7005F69BC /* ImagesListCell.swift */; };
 		77E4FED42B15142C00CCEC1F /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E4FED32B15142C00CCEC1F /* AuthViewController.swift */; };
@@ -72,7 +72,6 @@
 		774023E42B39958C0078DE58 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		774023E62B39C8A60078DE58 /* URLRequestImageList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestImageList.swift; sourceTree = "<group>"; };
 		774023EE2B3A20670078DE58 /* ImageFeedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageFeedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		774023F02B3A20670078DE58 /* ImagesListServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListServiceTests.swift; sourceTree = "<group>"; };
 		77450FAA2ADAFC6100A8C04D /* ImageFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77450FAD2ADAFC6100A8C04D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		77450FAF2ADAFC6100A8C04D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +80,7 @@
 		77450FB62ADAFC6200A8C04D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		77450FB92ADAFC6200A8C04D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		77450FBB2ADAFC6200A8C04D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7782D7952B3EAC450002E3D8 /* isLikedResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = isLikedResult.swift; sourceTree = "<group>"; };
 		77974E5C2B1364780083D88B /* ApiConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiConstants.swift; sourceTree = "<group>"; };
 		77BA99032AF65BF7005F69BC /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
 		77E4FED32B15142C00CCEC1F /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
@@ -140,23 +140,15 @@
 				774023DC2B3714980078DE58 /* UserResult.swift */,
 				774023DE2B3714B30078DE58 /* OAuthTokenResponseBody.swift */,
 				774023E22B39773E0078DE58 /* PhotoResult.swift */,
+				7782D7952B3EAC450002E3D8 /* isLikedResult.swift */,
 			);
 			path = StructForDecode;
-			sourceTree = "<group>";
-		};
-		774023EF2B3A20670078DE58 /* ImageFeedTests */ = {
-			isa = PBXGroup;
-			children = (
-				774023F02B3A20670078DE58 /* ImagesListServiceTests.swift */,
-			);
-			path = ImageFeedTests;
 			sourceTree = "<group>";
 		};
 		77450FA12ADAFC6100A8C04D = {
 			isa = PBXGroup;
 			children = (
 				77450FAC2ADAFC6100A8C04D /* ImageFeed */,
-				774023EF2B3A20670078DE58 /* ImageFeedTests */,
 				77450FAB2ADAFC6100A8C04D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -342,7 +334,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				774023F12B3A20670078DE58 /* ImagesListServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,6 +346,7 @@
 				77450FB22ADAFC6100A8C04D /* ImagesListViewController.swift in Sources */,
 				7715397F2B0170600031015D /* SingleImageViewController.swift in Sources */,
 				774023E72B39C8A60078DE58 /* URLRequestImageList.swift in Sources */,
+				7782D7962B3EAC450002E3D8 /* isLikedResult.swift in Sources */,
 				77075D3A2B0149DE00E27CF0 /* ProfileViewController.swift in Sources */,
 				77BA99042AF65BF7005F69BC /* ImagesListCell.swift in Sources */,
 				774023E52B39958C0078DE58 /* Photo.swift in Sources */,

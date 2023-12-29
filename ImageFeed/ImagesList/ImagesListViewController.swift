@@ -20,24 +20,24 @@ final class ImagesListViewController: UIViewController {
     private let showSingleImageSegueIdentifier = "ShowSingleImage"
     private let imagesListService = ImagesListService.shared
     private var ImageListServiceObserver: NSObjectProtocol?
-
+    
     
     // MARK: - Overrides Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
         ImageListServiceObserver = NotificationCenter.default
-                    .addObserver(
-                        forName: ImagesListService.DidChangeNotification,
-                        object: nil,
-                        queue: .main
-                    ) { [weak self] _ in
-                        guard let self = self else { return }
-                        self.updateTableViewAnimated()
-                    }
+            .addObserver(
+                forName: ImagesListService.DidChangeNotification,
+                object: nil,
+                queue: .main
+            ) { [weak self] _ in
+                guard let self = self else { return }
+                self.updateTableViewAnimated()
+            }
         UIBlockingProgressHUD.show()
         imagesListService.fetchPhotosNextPage(){ [weak self] result in
-            guard self != nil else { return }
+            guard let self else { return }
             switch result {
             case .success:
                 UIBlockingProgressHUD.dismiss()
@@ -59,20 +59,13 @@ final class ImagesListViewController: UIViewController {
     }
     
     func tableView(
-      _ tableView: UITableView,
-      willDisplay cell: UITableViewCell,
-      forRowAt indexPath: IndexPath
+        _ tableView: UITableView,
+        willDisplay cell: UITableViewCell,
+        forRowAt indexPath: IndexPath
     ) {
-        if indexPath.row + 1 == imagesListService.photos.count {
+        if indexPath.row + 1 == photos.count {
             imagesListService.fetchPhotosNextPage(){ [weak self] result in
-                guard self != nil else { return }
-                switch result {
-                case .success(let photo):
-                    print(photo)
-                case .failure(let error):
-                    print(error)
-                    break
-                }
+                guard let self else { return }
             }
         }
     }
@@ -101,7 +94,7 @@ extension ImagesListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ImagesListCell.reuseIdentifier, for: indexPath)
-    
+        
         guard let imageListCell = cell as? ImagesListCell else {
             return UITableViewCell()
         }
@@ -121,7 +114,8 @@ extension ImagesListViewController: UITableViewDataSource {
         } else {
             imageListCell.dateLabel.text = ""
         }
-            
+        imageListCell.setIsLiked(isLiked: photos[indexPath.row].isLiked)
+        
         return imageListCell
     }
 }
@@ -149,34 +143,32 @@ extension ImagesListViewController: ImagesListCellDelegate {
         let photo = photos[indexPath.row]
         
         UIBlockingProgressHUD.show()
-        imagesListService.changeLike(photoId: photo.id, isLike: photo.isLiked) { [weak self] result in
+        imagesListService.changeLike(photoId: photo.id, isLike: !photo.isLiked) { [weak self] result in
             guard let self = self else { return }
             
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [self] in
                 switch result {
                 case .success:
                     cell.setIsLiked(isLiked: !photo.isLiked)
-                    UIBlockingProgressHUD.dismiss()
                     if let index = self.photos.firstIndex(where: { $0.id == photo.id }) {
-                        let photo = self.photos[index]
+                        let oldPhoto = photo
                         let newPhoto = Photo(
-                            id: photo.id,
-                            width: photo.width,
-                            height: photo.height,
-                            createdAt: photo.createdAt,
-                            welcomeDescription: photo.welcomeDescription,
-                            thumbImageURL: photo.thumbImageURL,
-                            largeImageURL: photo.largeImageURL,
+                            id: oldPhoto.id,
+                            width: oldPhoto.width,
+                            height: oldPhoto.height,
+                            createdAt: oldPhoto.createdAt,
+                            welcomeDescription: oldPhoto.welcomeDescription,
+                            thumbImageURL: oldPhoto.thumbImageURL,
+                            largeImageURL: oldPhoto.largeImageURL,
                             isLiked: !photo.isLiked
                         )
                         self.photos.remove(at: index)
                         self.photos.insert(newPhoto, at: index)
                     }
-                case .failure(let error):
                     UIBlockingProgressHUD.dismiss()
-                    print(error)
+                case .failure:
+                    UIBlockingProgressHUD.dismiss()
                 }
-                
             }
         }
     }
