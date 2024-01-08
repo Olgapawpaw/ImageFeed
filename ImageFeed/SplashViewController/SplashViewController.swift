@@ -3,9 +3,11 @@ import UIKit
 import ProgressHUD
 
 class SplashViewController: UIViewController {
+    // MARK: - Private Properties
     private let profileService = ProfileService.shared
     private let profileImageService = ProfileImageService.shared
     
+    // MARK: - Overrides Methods
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         createSplashView()
@@ -30,6 +32,7 @@ class SplashViewController: UIViewController {
         .lightContent
     }
     
+    // MARK: - Private Methods
     private func switchToTabBarController() {
         guard let window = UIApplication.shared.windows.first else {
             fatalError("Invalid Configuration")
@@ -46,6 +49,7 @@ class SplashViewController: UIViewController {
     }
 }
 
+// MARK: - AuthViewControllerDelegate
 extension SplashViewController: AuthViewControllerDelegate {
     func authViewController(_ vc: AuthViewController, didAuthenticateWithCode code: String) {
         fetchOAuthToken(code)

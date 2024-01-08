@@ -1,9 +1,11 @@
 import Foundation
 
 final class OAuth2Service {
+    // MARK: - Private Properties
     private var task: URLSessionTask?
     private var lastCode: String?
     
+    // MARK: - Public Methods
     func fetchOAuthToken(_ code: String, completion: @escaping (Result<String, Error>) -> Void ) {
         assert(Thread.isMainThread)
         if lastCode == code { return }
@@ -27,16 +29,17 @@ final class OAuth2Service {
     }
 }
 
+// MARK: - URLRequest
 extension URLRequest {
     static func makeHTTPRequest (httpMethod: String, code: String) -> URLRequest {
         var urlComponents = URLComponents()
-        urlComponents.scheme = ApiConstants.schemeURL.rawValue
-        urlComponents.host = ApiConstants.hostURL.rawValue
+        urlComponents.scheme = AuthConfiguration.standard.schemeURL
+        urlComponents.host = AuthConfiguration.standard.hostURL
         urlComponents.path = NetworkURL.pathURL.rawValue
         urlComponents.queryItems = [
-            URLQueryItem(name: "client_id", value: ApiConstants.accessKey.rawValue),
-            URLQueryItem(name: "client_secret", value: ApiConstants.secretKey.rawValue),
-            URLQueryItem(name: "redirect_uri", value: ApiConstants.redirectURI.rawValue),
+            URLQueryItem(name: "client_id", value: AuthConfiguration.standard.accessKey),
+            URLQueryItem(name: "client_secret", value: AuthConfiguration.standard.secretKey),
+            URLQueryItem(name: "redirect_uri", value: AuthConfiguration.standard.redirectURI),
             URLQueryItem(name: "code", value: code),
             URLQueryItem(name: "grant_type", value: "authorization_code")
         ]

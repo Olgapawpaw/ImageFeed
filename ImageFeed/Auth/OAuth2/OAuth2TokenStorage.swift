@@ -3,6 +3,7 @@ import SwiftKeychainWrapper
 
 final class OAuth2TokenStorage {
     
+    // MARK: - Public Properties
     var token: String? {
         get {
             return KeychainWrapper.standard.string(forKey: "Auth token")
@@ -19,6 +20,7 @@ final class OAuth2TokenStorage {
         }
     }
     
+    // MARK: - Public Methods
     func deleteToken() {
         KeychainWrapper.standard.removeObject(forKey: "Auth token")
     }

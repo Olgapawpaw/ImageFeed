@@ -3,9 +3,18 @@ import UIKit
 import Kingfisher
 import WebKit
 
-final class ProfileViewController: UIViewController {
-    private let profileService = ProfileService.shared
-    private let profileImageService = ProfileImageService.shared
+public protocol ProfileViewControllerProtocol: AnyObject {
+    var presenter: ProfileViewPresenterProtocol? { get set }
+    func updateAvatar(url: URL)
+    func updateProfileData(nameLabel: String?, loginNameLabel: String, bioLabel: String?)
+}
+
+final class ProfileViewController: UIViewController & ProfileViewControllerProtocol {
+    
+    // MARK: - Public Properties
+    var presenter: ProfileViewPresenterProtocol?
+    
+    // MARK: - Private Properties
     private var profileImageServiceObserver: NSObjectProtocol?
     private let profilePhoto = UIImageView()
     private let nameLabel = UILabel()
@@ -24,10 +33,24 @@ final class ProfileViewController: UIViewController {
                 queue: .main
             ) { [weak self] _ in
                 guard let self = self else { return }
-                self.updateAvatar()
+                presenter?.updateUrlForAvatar()
             }
-        updateAvatar()
-        updateProfileData()
+        
+        presenter?.viewDidLoad()
+    }
+    
+    // MARK: - Public Methods
+    func updateAvatar(url: URL) {
+        let processor = RoundCornerImageProcessor(cornerRadius: 61)
+        profilePhoto.kf.indicatorType = .activity
+        profilePhoto.kf.setImage(with: url,
+                                 options: [.processor(processor)])
+    }
+    
+    func updateProfileData(nameLabel: String?, loginNameLabel: String, bioLabel: String?) {
+        self.nameLabel.text = nameLabel
+        self.loginNameLabel.text = loginNameLabel
+        self.bioLabel.text = bioLabel
     }
     
     // MARK: - Private Methods
@@ -38,6 +61,7 @@ final class ProfileViewController: UIViewController {
             target: self,
             action: #selector(Self.didTapButton)
         )
+        exitButton.accessibilityIdentifier = "LogoutButton"
         
         view.addSubview(profilePhoto)
         view.addSubview(nameLabel)
@@ -80,23 +104,6 @@ final class ProfileViewController: UIViewController {
             exitButton.heightAnchor.constraint(equalToConstant: 44),
             exitButton.widthAnchor.constraint(equalToConstant: 44)
         ])
-    }
-    
-    private func updateAvatar() {
-        guard
-            let profileImageURL = profileImageService.avatarURL,
-            let url = URL(string: profileImageURL)
-        else { return }
-        let processor = RoundCornerImageProcessor(cornerRadius: 61)
-        profilePhoto.kf.indicatorType = .activity
-        profilePhoto.kf.setImage(with: url,
-                                 options: [.processor(processor)])
-    }
-    
-    private func updateProfileData() {
-        nameLabel.text = profileService.profile?.name
-        loginNameLabel.text = profileService.profile?.loginName
-        bioLabel.text = profileService.profile?.bio
     }
     
     @objc
