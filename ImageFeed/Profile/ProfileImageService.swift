@@ -1,12 +1,16 @@
 import Foundation
 
 final class ProfileImageService {
-    private(set) var avatarURL: String?
-    private var task: URLSessionTask?
-    private var lastUsername: String?
+    // MARK: - Public Properties
     static let DidChangeNotification = Notification.Name(rawValue: "ProfileImageProviderDidChange")
     static let shared = ProfileImageService()
     
+    // MARK: - Private Properties
+    private(set) var avatarURL: String?
+    private var task: URLSessionTask?
+    private var lastUsername: String?
+    
+    // MARK: - Public Methods
     func fetchProfileImageURL(username: String, completion: @escaping (Result<String, Error>) -> Void) {
         assert(Thread.isMainThread)
         

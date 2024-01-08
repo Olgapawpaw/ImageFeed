@@ -7,9 +7,7 @@ final class SingleImageViewController: UIViewController {
     // MARK: - IB Outlets
     @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var imageView: UIImageView!
-    
-    var imageURL: String?
-    
+        
     // MARK: - Public Properties
     var image: UIImage! {
         didSet {
@@ -18,6 +16,7 @@ final class SingleImageViewController: UIViewController {
             rescaleAndCenterImageInScrollView(image: image)
         }
     }
+    var imageURL: String?
     
     // MARK: - Overrides Methods
     override func viewDidLoad() {

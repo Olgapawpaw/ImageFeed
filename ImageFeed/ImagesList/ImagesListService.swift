@@ -1,16 +1,21 @@
 import Foundation
 
 final class ImagesListService {
+    // MARK: - Public Properties
+    static let DidChangeNotification = Notification.Name(rawValue: "ImagesListServiceDidChange")
+    static let shared = ImagesListService()
+    
+    // MARK: - Private Properties
     private var lastLoadedPage: Int? = nil
     private (set) var photos: [Photo] = []
     private var task: URLSessionTask?
-    static let DidChangeNotification = Notification.Name(rawValue: "ImagesListServiceDidChange")
     private var nextPage = 1
     private let dateFormatter = ISO8601DateFormatter()
-    static let shared = ImagesListService()
     
+    // MARK: - Initializers
     private init() { }
     
+    // MARK: - Public Methods
     func fetchPhotosNextPage(completion: @escaping (Result<[Photo], Error>) -> Void) {
         assert(Thread.isMainThread)
         
@@ -95,31 +100,3 @@ final class ImagesListService {
         self.task = nil
     }
 }
-    
-    
-    
-//    func changeLike(photoId: String, isLike: Bool, _ completion: @escaping (Result<Void, Error>) -> Void) {
-//
-//        guard let token = OAuth2TokenStorage().token else { return }
-//
-//        let request = URLRequest.makeHTTPRequest(httpMethod: isLike ? "POST" : "DELETE", token: token, pathURL: "/photos/\(photoId)/like")
-//
-//        let session = URLSession.shared
-//        let task = session.dataTask(with: request) { (data, response, error) in
-//            DispatchQueue.main.async {
-//                if let response = response,
-//                   let statusCode = (response as? HTTPURLResponse)?.statusCode {
-//                    if 200 ..< 300 ~= statusCode {
-//                        completion(.success(()))
-//                    } else {
-//                        completion(.failure(NetworkError.httpStatusCode(statusCode)))
-//                    }
-//                } else if let error = error {
-//                    completion(.failure(NetworkError.urlRequestError(error)))
-//                } else {
-//                    completion(.failure(NetworkError.urlSessionError))
-//                }
-//            }
-//        }
-//        task.resume()
-//    }

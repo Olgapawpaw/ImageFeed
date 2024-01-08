@@ -3,8 +3,8 @@ import Foundation
 extension URLRequest {
     static func makeHTTPRequestForImageList (httpMethod: String, token: String, pathURL: String, page: Int) -> URLRequest {
         var urlComponents = URLComponents()
-        urlComponents.scheme = ApiConstants.schemeURL.rawValue
-        urlComponents.host = ApiConstants.baseURL.rawValue
+        urlComponents.scheme = AuthConfiguration.standard.schemeURL
+        urlComponents.host = AuthConfiguration.standard.baseURL
         urlComponents.path = pathURL
         urlComponents.queryItems = [
             URLQueryItem(name: "page", value: String(page))
