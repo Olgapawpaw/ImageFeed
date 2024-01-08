@@ -5,7 +5,7 @@ final class ProfileService {
     private(set) var profile: Profile?
     private var task: URLSessionTask?
     private var lastToken: String?
-
+    
     func fetchProfile(_ token: String, completion: @escaping (Result<Profile, Error>) -> Void) {
         assert(Thread.isMainThread)
         
@@ -13,7 +13,7 @@ final class ProfileService {
         task?.cancel()
         lastToken = token
         
-        let request = URLRequest.makeHTTPRequestForProfile(httpMethod: "GET", token: token, pathURL: "/me")
+        let request = URLRequest.makeHTTPRequest(httpMethod: "GET", token: token, pathURL: "/me")
         
         let session = URLSession.shared
         let task = session.objectTask(for: request) { [weak self] (result: Result<ProfileResult, Error>) in
@@ -27,7 +27,7 @@ final class ProfileService {
                 self?.lastToken = nil
             }
         }
-
+        
         self.task = task
         task.resume()
     }

@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 import Kingfisher
+import WebKit
 
 final class ProfileViewController: UIViewController {
     private let profileService = ProfileService.shared
@@ -17,14 +18,14 @@ final class ProfileViewController: UIViewController {
         createProfileScreen()
         
         profileImageServiceObserver = NotificationCenter.default
-                    .addObserver(
-                        forName: ProfileImageService.DidChangeNotification,
-                        object: nil,
-                        queue: .main
-                    ) { [weak self] _ in
-                        guard let self = self else { return }
-                        self.updateAvatar()
-                    }
+            .addObserver(
+                forName: ProfileImageService.DidChangeNotification,
+                object: nil,
+                queue: .main
+            ) { [weak self] _ in
+                guard let self = self else { return }
+                self.updateAvatar()
+            }
         updateAvatar()
         updateProfileData()
     }
@@ -89,7 +90,7 @@ final class ProfileViewController: UIViewController {
         let processor = RoundCornerImageProcessor(cornerRadius: 61)
         profilePhoto.kf.indicatorType = .activity
         profilePhoto.kf.setImage(with: url,
-                              options: [.processor(processor)])
+                                 options: [.processor(processor)])
     }
     
     private func updateProfileData() {
@@ -100,5 +101,21 @@ final class ProfileViewController: UIViewController {
     
     @objc
     private func didTapButton() {
+        let alert = UIAlertController(title: "Пока, Пока!", message: "Уверены, что хотите выйти?", preferredStyle: .alert)
+        let doingAction = UIAlertAction(title: "Да", style: .default) { [weak self] _ in
+            guard let self = self else {return}
+            HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
+            WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
+                records.forEach { record in
+                    WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record], completionHandler: {})
+                }
+            }
+            OAuth2TokenStorage().deleteToken()
+            let window = UIApplication.shared.windows.first
+            window?.rootViewController = SplashViewController()
+        }
+        alert.addAction(UIAlertAction(title: "Нет", style: .cancel, handler: nil))
+        alert.addAction(doingAction)
+        present(alert, animated: true, completion: nil)
     }
 }
